@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
+import Home from "./pages";
+import ContactPage from "./pages/contact";
+import OptionsPage from "./pages/options";
+import ScrollToTop from "./components/ScroolToTop";
 
 function App() {
+    const PageNotFound = () => (
+        <div>404 !<Link to="/">Home</Link></div>
+    )
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        <ScrollToTop />
+       <Switch>
+           <Route path="/" component={Home} exact />
+           <Route path="/contact" component={ContactPage} exact />
+           <Route path="/options" component={OptionsPage} exact />
+           <Route component={PageNotFound} />
+       </Switch>
+    </Router>
   );
 }
 
